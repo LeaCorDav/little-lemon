@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function Header() {
     return (
         <header className="p-4 lg:py-6">
@@ -9,16 +11,16 @@ export default function Header() {
                 <nav className="hidden md:block">
                     <ul className="flex gap-6">
                         <li>
-                            <a href="/#">Home</a>
+                            <Link to="/">Home</Link>
                         </li>
                         <li>
-                            <a href="/#">About</a>
+                            <a href="/#About">About</a>
                         </li>
                         <li>
                             <a href="/#">Menu</a>
                         </li>
                         <li>
-                            <a href="/#">Reservations</a>
+                            <Link to="/booking">Reservations</Link>
                         </li>
                         <li>
                             <a href="/#">Order Online</a>

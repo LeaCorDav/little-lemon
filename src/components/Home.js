@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import {specialsData, testimonialsData} from "./homeComponents/Data.js";
 import SpecialsCard from "./homeComponents/SpecialsCard";
 import TestimonialsCard from "./homeComponents/TestimonialsCard";
@@ -30,7 +31,7 @@ export default function Home() {
                         Chicago
                     </h1>
                     <p className="text-white w-1/2 max-w-60 mb-12">We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.</p>
-                    <button className="btn-primary">Reserve a Table</button>
+                    <Link to="/booking" className="btn-primary">Reservations</Link>
                     <img src="/img/hero-img.jpg" alt="hero" height={"380px"} width={"350px"} className="object-cover w-5/12 max-w-[352px] h-full sm:h-96 max-h-60 sm:max-h-96 rounded-2xl shadow-lg absolute top-1/3 right-0 sm:top-0"/>
                 </div>
             </section>
@@ -57,7 +58,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="px-4 py-8 sm:py-20">
+            <section id="About" className="px-4 py-8 sm:py-20">
                 <div className="relative m-auto max-w-4xl">
                     <h2 className="text-subtitle text-mainColor flex flex-col mb-4 sm:mb-12">
                         Little Lemon
