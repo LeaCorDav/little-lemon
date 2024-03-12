@@ -1,7 +1,7 @@
-import { useReducer, useState } from "react";
+import { useReducer } from "react";
 import BookingForm from "./bookingComponents/BookingForm";
 
-const updateTimes = (state, action) => {
+export const updateTimes = (state, action) => {
     if(action.type === "0") return ["09:00", "10:00"]
     if(action.type === "1") return ["11:00", "12:00", "13:00"]
     if(action.type === "2") return ["14:00", "15:00", "16:00"]
@@ -11,10 +11,10 @@ const updateTimes = (state, action) => {
     if(action.type === "6") return ["01:00", "02:00", "03:00"]
     return state
 }
+export const initializeTimes = []
 
 export default function BookingPage() {
     /* const [availableTimes, setAvailableTimes] = useState(["17:00", "18:00", "19:00", "20:00", "21:00"]) */
-    const initializeTimes = ["17:00"]
     const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes)
     
     return (

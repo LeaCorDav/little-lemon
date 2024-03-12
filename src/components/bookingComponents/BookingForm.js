@@ -14,9 +14,13 @@ export default function BookingForm(props) {
 		console.log("Form submitted") 
 	}
 
-    const timesOptions = props.times.map(time => {
+    /* const timesOptions = props.times.map(time => {
         return <option key={time}>{time}</option>
-    })
+    }) */
+
+    const timesOptions = props.times ? props.times.map(time => {
+        return <option key={time}>{time}</option>;
+    }) : [];
 
     return (
         <form className="flex flex-col grow" onSubmit={handleSubmit}>
@@ -87,7 +91,12 @@ export default function BookingForm(props) {
                 <option>Birthday</option>
                 <option>Anniversary</option>
             </select>
-            <input type="submit" value="Make Your reservation" className="btn-primary mt-8 mx-auto" />
+            <input 
+                type="submit" 
+                value="Make Your reservation" 
+                className="btn-primary mt-8 mx-auto"
+                data-testid="submitButton"
+            />
         </form>
     );
 }
