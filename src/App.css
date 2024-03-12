@@ -43,10 +43,11 @@
     transition: 300ms;
     border: 2px solid #F4CE14;
     width: fit-content;
+    cursor: pointer;
 }
 .btn-primary:hover,
 .btn-primary:focus {
-  box-shadow: inset 10em 0 0 0 #495E57;
+  box-shadow: inset 13em 0 0 0 #495E57;
   color: #F4CE14;
 }
 .btn-tertiary {
