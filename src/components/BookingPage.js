@@ -1,20 +1,21 @@
 import { useReducer } from "react";
 import BookingForm from "./bookingComponents/BookingForm";
+import { fetchAPI,submitAPI } from "../API/api"
 
 export const updateTimes = (state, action) => {
-    if(action.type === "0") return ["09:00", "10:00"]
-    if(action.type === "1") return ["11:00", "12:00", "13:00"]
-    if(action.type === "2") return ["14:00", "15:00", "16:00"]
-    if(action.type === "3") return ["17:00", "18:00", "19:00"]
-    if(action.type === "4") return ["20:00", "21:00", "22:00"]
-    if(action.type === "5") return ["22:00", "23:00", "00:00"]
-    if(action.type === "6") return ["01:00", "02:00", "03:00"]
+    if(action.type === "2024-03-12") return ["09:00", "10:00"]
+    if(action.type === "2024-03-13") return ["11:00", "12:00", "13:00"]
+    if(action.type === "2024-03-14") return ["14:00", "15:00", "16:00"]
+    if(action.type === "2024-03-15") return ["17:00", "18:00", "19:00"]
+    if(action.type === "2024-03-16") return ["20:00", "21:00", "22:00"]
+    if(action.type === "2024-03-17") return ["22:00", "23:00", "00:00"]
+    if(action.type === "2024-03-18") return ["01:00", "02:00", "03:00"]
     return state
 }
-export const initializeTimes = []
+export const initializeTimes = ["-----Select a date-----"]
+/* new Date().toISOString().split('T')[0] */
 
 export default function BookingPage() {
-    /* const [availableTimes, setAvailableTimes] = useState(["17:00", "18:00", "19:00", "20:00", "21:00"]) */
     const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes)
     
     return (

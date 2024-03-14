@@ -14,10 +14,6 @@ export default function BookingForm(props) {
 		console.log("Form submitted") 
 	}
 
-    /* const timesOptions = props.times.map(time => {
-        return <option key={time}>{time}</option>
-    }) */
-
     const timesOptions = props.times ? props.times.map(time => {
         return <option key={time}>{time}</option>;
     }) : [];
@@ -34,7 +30,7 @@ export default function BookingForm(props) {
                         ...values,
                         date: e.target.value
                     });
-                    props.setTimes({type: new Date(values.date).getDay().toString()})
+                    props.setTimes({ type: values.date })
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
             />

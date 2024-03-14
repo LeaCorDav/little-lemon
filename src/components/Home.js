@@ -11,6 +11,7 @@ export default function Home() {
             title={special.title} 
             price={special.price}
             description={special.description}
+            key={special.title}
         />
     })
     const testimonials = testimonialsData.map(testimonial => {
@@ -19,6 +20,7 @@ export default function Home() {
             photosrc={testimonial.photosrc} 
             name={testimonial.name}
             review={testimonial.review}
+            key={testimonial.name}
         />
     })
 
