@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function BookingForm(props) {
-    const [values, setValues] = useState({
-        date: "",
+    const [formData, setFormData] = useState({
+        date: new Date().toISOString().split('T')[0],
         time: "",
         guests: "",
         occasion: ""
@@ -10,11 +10,16 @@ export default function BookingForm(props) {
 
     const handleSubmit = (e) => { 
 		e.preventDefault()
-		setValues("")
-		console.log("Form submitted") 
+		setFormData({
+            date: "",
+            time: "",
+            guests: "",
+            occasion: ""
+        })
+		props.submitForm(formData)
 	}
 
-    const timesOptions = props.times ? props.times.map(time => {
+    const timesOptions = props.state.availableTimes ? props.state.availableTimes.map(time => {
         return <option key={time}>{time}</option>;
     }) : [];
 
@@ -24,36 +29,30 @@ export default function BookingForm(props) {
             <input 
                 type="date" 
                 id="res-date"
-                value={values.date}
+                value={formData.date}
                 onChange={e => {
-                    setValues({
-                        ...values,
+                    setFormData({
+                        ...formData,
                         date: e.target.value
                     });
-                    props.setTimes({ type: values.date })
+                    props.dispatch(e.target.value)
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
             />
             <label htmlFor="res-time" className="text-sectionCategories text-darkColor mt-5 mb-2">Choose time</label>
             <select 
                 id="res-time"
-                value={values.time}
+                value={formData.time}
                 onChange={e => {
-                    setValues({
-                        ...values,
+                    setFormData({
+                        ...formData,
                         time: e.target.value
                     });
-                    console.log(values);
+                    console.log(formData);
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor"
             >
                 {timesOptions}
-                {/* <option>17:00</option>
-                <option>18:00</option>
-                <option>19:00</option>
-                <option>20:00</option>
-                <option>21:00</option>
-                <option>22:00</option> */}
             </select>
             <label htmlFor="guests" className="text-sectionCategories text-darkColor mt-5 mb-2">Number of guests</label>
             <input 
@@ -61,26 +60,26 @@ export default function BookingForm(props) {
                 placeholder="1" 
                 min="1" max="10" 
                 id="guests"
-                value={values.guests}
+                value={formData.guests}
                 onChange={e => {
-                    setValues({
-                        ...values,
+                    setFormData({
+                        ...formData,
                         guests: e.target.value
                     });
-                    console.log(values);
+                    console.log(formData);
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
             />
             <label htmlFor="occasion" className="text-sectionCategories text-darkColor mt-5 mb-2">Occasion</label>
             <select 
                 id="occasion"
-                value={values.occasion}
+                value={formData.occasion}
                 onChange={e => {
-                    setValues({
-                        ...values,
+                    setFormData({
+                        ...formData,
                         occasion: e.target.value
                     });
-                    console.log(values);
+                    console.log(formData);
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor"
             >
