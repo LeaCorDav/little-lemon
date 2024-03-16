@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import BookingPage from './components/BookingPage';
 
 
 test('Test for some static text being rendered', () => {
-  render(<BookingPage />)
+  render(<BrowserRouter><BookingPage /></BrowserRouter>)
 
   const headingElement = screen.getByText('reserve a table', {exact: false})
   const dateElement = screen.getByLabelText('date', {exact: false});
@@ -22,9 +23,9 @@ test('Test for some static text being rendered', () => {
 
 
 test('Test the updateTimes and initializeTimes functions', () => {
-  const initializeTimes = require("./components/BookingPage").initializeTimes
-  expect(initializeTimes).toStrictEqual([])
+  const initializeTimes = require("./components/BookingPage").initializeTimes.availableTimes
+  expect(initializeTimes.length).toBeGreaterThan(0)
 
   const updateTimes = require("./components/BookingPage").updateTimes
-  expect(updateTimes(["01:00", "02:00", "03:00"], "6")).toStrictEqual(["01:00", "02:00", "03:00"])
+  expect(updateTimes([], "2024-03-17").availableTimes).toContain("--- Select a time ---")
 });
