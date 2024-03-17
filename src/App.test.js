@@ -29,3 +29,21 @@ test('Test the updateTimes and initializeTimes functions', () => {
   const updateTimes = require("./components/BookingPage").updateTimes
   expect(updateTimes([], "2024-03-17").availableTimes).toContain("--- Select a time ---")
 });
+
+
+test('Validate the HTML5 validation is applied', () => {
+  render(<BrowserRouter><BookingPage /></BrowserRouter>)
+
+  const dateElement = screen.getByLabelText('date', {exact: false});
+  const timeElement = screen.getByLabelText(/choose time/i);
+  const guestsElement = screen.getByLabelText('guests', {exact: false});
+  const buttonElement = screen.getByTestId("submitButton");
+  
+  expect(dateElement).toHaveAttribute("min")
+  expect(dateElement).toHaveAttribute("required")
+  expect(timeElement).toHaveAttribute("required")
+  expect(guestsElement).toHaveAttribute("min")
+  expect(guestsElement).toHaveAttribute("max")
+  expect(guestsElement).toHaveAttribute("required")
+  expect(buttonElement).toHaveAttribute("disabled")
+});

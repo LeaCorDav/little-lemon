@@ -30,8 +30,8 @@ export default function Header() {
                         </li>
                     </ul>
                 </nav>
-                <button className="md:hidden p-2">
-                    <img src="/icons/basket.svg" alt="cart icon" height={"24px"} width={"25px"} className="h-6" />
+                <button className="md:hidden p-2" aria-label="cart">
+                    <img src="/icons/basket.svg" alt="cart icon" height={"24px"} width={"25px"} className="h-6" aria-hidden="true"/>
                 </button>
             </div>
         </header>

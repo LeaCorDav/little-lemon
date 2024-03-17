@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 export default function BookingForm(props) {
+    const today = new Date().toISOString().split('T')[0]
     const [formData, setFormData] = useState({
-        date: new Date().toISOString().split('T')[0],
+        date: today,
         time: "",
         guests: 1,
         occasion: "--- Select an occasion ---"
@@ -28,7 +29,7 @@ export default function BookingForm(props) {
             <label htmlFor="res-date" className="text-sectionCategories text-darkColor mt-5 mb-2">Choose date</label>
             <input 
                 type="date"
-                min={new Date().toISOString().split('T')[0]}
+                min={today}
                 id="res-date"
                 value={formData.date}
                 onChange={e => {
@@ -38,12 +39,12 @@ export default function BookingForm(props) {
                     });
                     props.dispatch(e.target.value)
                 }}
-                className={`p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0 ${formData.date < new Date().toISOString().split('T')[0] ? "border-b-red-600" : ""}`}
+                className={`p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0 ${formData.date < today ? "border-b-red-600" : ""}`}
                 required
             />
             { 
-                formData.date < new Date().toISOString().split('T')[0] ? 
-                <p className="text-red-600">You must enter a valid date</p> : "" 
+                formData.date < today ? 
+                <p className="text-red-600">Please enter a valid date</p> : "" 
             }
             <label htmlFor="res-time" className="text-sectionCategories text-darkColor mt-5 mb-2">Choose time</label>
             <select 
@@ -77,7 +78,7 @@ export default function BookingForm(props) {
                         guests: e.target.value
                     });
                 }}
-                className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
+                className={`p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0 ${formData.guests < 1 || formData.guests > 10 ? "border-b-red-600" : ""}`}
                 required
             />
             { 
