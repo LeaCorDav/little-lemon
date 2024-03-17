@@ -50,6 +50,10 @@
   box-shadow: inset 13em 0 0 0 #495E57;
   color: #F4CE14;
 }
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 .btn-tertiary {
     font-weight: 500;
     font-size: 1rem;

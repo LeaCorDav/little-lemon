@@ -4,8 +4,8 @@ export default function BookingForm(props) {
     const [formData, setFormData] = useState({
         date: new Date().toISOString().split('T')[0],
         time: "",
-        guests: "",
-        occasion: ""
+        guests: 1,
+        occasion: "--- Select an occasion ---"
     })
 
     const handleSubmit = (e) => { 
@@ -27,7 +27,8 @@ export default function BookingForm(props) {
         <form className="flex flex-col grow" onSubmit={handleSubmit}>
             <label htmlFor="res-date" className="text-sectionCategories text-darkColor mt-5 mb-2">Choose date</label>
             <input 
-                type="date" 
+                type="date"
+                min={new Date().toISOString().split('T')[0]}
                 id="res-date"
                 value={formData.date}
                 onChange={e => {
@@ -37,8 +38,13 @@ export default function BookingForm(props) {
                     });
                     props.dispatch(e.target.value)
                 }}
-                className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
+                className={`p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0 ${formData.date < new Date().toISOString().split('T')[0] ? "border-b-red-600" : ""}`}
+                required
             />
+            { 
+                formData.date < new Date().toISOString().split('T')[0] ? 
+                <p className="text-red-600">You must enter a valid date</p> : "" 
+            }
             <label htmlFor="res-time" className="text-sectionCategories text-darkColor mt-5 mb-2">Choose time</label>
             <select 
                 id="res-time"
@@ -48,12 +54,16 @@ export default function BookingForm(props) {
                         ...formData,
                         time: e.target.value
                     });
-                    console.log(formData);
                 }}
-                className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor"
+                className={`p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor ${formData.time === "--- Select a time ---" ? "border-b-red-600" : ""}`}
+                required
             >
                 {timesOptions}
             </select>
+            { 
+                formData.time === "--- Select a time ---" ? 
+                <p className="text-red-600">Please choose an available time</p> : "" 
+            }
             <label htmlFor="guests" className="text-sectionCategories text-darkColor mt-5 mb-2">Number of guests</label>
             <input 
                 type="number" 
@@ -66,10 +76,18 @@ export default function BookingForm(props) {
                         ...formData,
                         guests: e.target.value
                     });
-                    console.log(formData);
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor focus-visible:outline-0"
+                required
             />
+            { 
+                formData.guests < 1 ? 
+                <p className="text-red-600">Please select a valid number of guests between 1 and 10</p> : ""
+            }
+            { 
+                formData.guests > 10 ? 
+                <p className="text-red-600">Please contact us via phone call for more than 10 persons reservations</p> : ""
+            }
             <label htmlFor="occasion" className="text-sectionCategories text-darkColor mt-5 mb-2">Occasion</label>
             <select 
                 id="occasion"
@@ -79,18 +97,24 @@ export default function BookingForm(props) {
                         ...formData,
                         occasion: e.target.value
                     });
-                    console.log(formData);
                 }}
                 className="p-4 border-2 border-darkColor/35 rounded-lg text-darkColor focus:border-secDarkColor"
             >
+                <option>--- Select an occasion ---</option>
                 <option>Birthday</option>
                 <option>Anniversary</option>
+                <option>Other</option>
             </select>
+            { 
+                formData.occasion != "--- Select an occasion ---" ? 
+                <p className="text-mainColor">Feel free to contact us if you have any special request for you special occasion!</p> : ""
+            }
             <input 
                 type="submit" 
                 value="Make Your reservation" 
                 className="btn-primary mt-8 mx-auto"
                 data-testid="submitButton"
+                disabled={!formData.date || !formData.time || formData.time == "--- Select a time ---" || !formData.guests}
             />
         </form>
     );
